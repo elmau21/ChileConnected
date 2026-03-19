@@ -1,0 +1,9 @@
+[build]
+  # Monorepo (Windows): evitamos duplicación de rutas usando command/publish
+  # relativos a la raíz del repo (sin build.base).
+  command = "npm --prefix apps/web run build"
+  publish = "apps/web/.next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+

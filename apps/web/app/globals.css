@@ -1,0 +1,308 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --bg: #FAFAFA;
+  --bg2: #FFFFFF;
+  --card: #FFFFFF;
+  --card-hover: #F9FAFB;
+  --ink: #111827;
+  --muted: #6B7280;
+  --border: #E5E7EB;
+  --emerald: #10B981;
+  --blue: #2563EB;
+  --accent-glow: rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #111827;
+  --bg2: #1F2937;
+  --card: #1F2937;
+  --card-hover: #374151;
+  --ink: #F9FAFB;
+  --muted: #9CA3AF;
+  --border: #374151;
+  --accent-glow: rgba(255, 255, 255, 0.04);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-body), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  background-color: var(--bg);
+  color: var(--ink);
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+}
+
+.noise-bg {
+  display: none; /* Removed for clean look */
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+::selection {
+  background: rgba(37, 99, 235, 0.2);
+}
+
+/* Display font */
+.font-display {
+  font-family: var(--font-display), ui-serif, Georgia, "Times New Roman", serif;
+  letter-spacing: -0.02em;
+}
+
+/* ──────────────────────────────────────────
+   GLASS CARD (Now Clean White Card)
+────────────────────────────────────────── */
+.glass-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+}
+
+/* ──────────────────────────────────────────
+   SOLID BUTTON (Notion Style)
+────────────────────────────────────────── */
+.btn-gradient {
+  background: var(--ink);
+  color: var(--card);
+  font-weight: 500;
+  border-radius: 8px;
+  border: 1px solid var(--ink);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+.btn-gradient:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-card);
+}
+.btn-gradient:active:not(:disabled) {
+  transform: scale(0.98);
+}
+.btn-gradient:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ──────────────────────────────────────────
+   INPUT FIELD
+────────────────────────────────────────── */
+.input-glass {
+  width: 100%;
+  background: var(--card-hover);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--ink);
+  font-size: 0.875rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+.input-glass::placeholder {
+  color: var(--muted);
+}
+.input-glass:focus {
+  background: var(--card);
+  border-color: var(--muted);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+/* ──────────────────────────────────────────
+   TYPING DOTS
+────────────────────────────────────────── */
+@keyframes dots {
+  0%, 20%   { opacity: 0.3; transform: translateY(0);    }
+  50%       { opacity: 1;   transform: translateY(-2px); }
+  100%      { opacity: 0.3; transform: translateY(0);    }
+}
+.typing-dot {
+  animation: dots 1.3s infinite ease-in-out;
+  display: inline-block;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.18s; }
+.typing-dot:nth-child(3) { animation-delay: 0.36s; }
+
+/* ──────────────────────────────────────────
+   FADE-UP
+────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+.fade-up {
+  animation: fadeUp 0.3s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+/* ──────────────────────────────────────────
+   PULSE GLOW (Light Mode)
+────────────────────────────────────────── */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37,99,235,0.15); }
+  50%      { box-shadow: 0 0 0 4px rgba(37,99,235,0);  }
+}
+.pulse-glow { animation: pulseGlow 2s ease-in-out infinite; }
+
+/* ──────────────────────────────────────────
+   STATUS BADGE DOT
+────────────────────────────────────────── */
+@keyframes blink {
+  0%, 100% { opacity: 1;   }
+  50%      { opacity: 0.5; }
+}
+.status-dot-pulse { animation: blink 2s ease-in-out infinite; }
+
+/* ──────────────────────────────────────────
+   RESULT CARDS
+────────────────────────────────────────── */
+.result-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+}
+.result-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+  border-color: var(--muted);
+}
+
+/* ──────────────────────────────────────────
+   BADGE pills
+────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+.badge-green  { background: #D1FAE5; color: #065F46; border: 1px solid #A7F3D0; }
+.badge-red    { background: #FCA5A5; color: #7F1D1D; border: 1px solid #EF4444; }
+.badge-amber  { background: #FEF3C7; color: #92400E; border: 1px solid #FDE68A; }
+.badge-muted  { background: #F3F4F6; color: #4B5563; border: 1px solid #E5E7EB; }
+.badge-blue   { background: #DBEAFE; color: #1E40AF; border: 1px solid #BFDBFE; }
+.badge-elegible    { background: #D1FAE5; color: #065F46; }
+.badge-posible     { background: #FEF3C7; color: #92400E; }
+.badge-no_elegible { background: #F3F4F6; color: #6B7280; }
+
+[data-theme="dark"] .badge-muted,
+[data-theme="dark"] .badge-no_elegible {
+  background: var(--card-hover);
+  color: var(--muted);
+  border-color: var(--border);
+}
+
+/* ──────────────────────────────────────────
+   TOGGLE PILL (Light Mode)
+────────────────────────────────────────── */
+.toggle-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--muted);
+  transition: all 0.15s ease;
+  user-select: none;
+  box-shadow: var(--shadow-sm);
+}
+.toggle-pill:hover {
+  background: var(--card-hover);
+  border-color: var(--muted);
+  color: var(--ink);
+}
+.toggle-pill.active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--card);
+  box-shadow: var(--shadow-card);
+}
+
+/* ──────────────────────────────────────────
+   SHIMMER SKELETON (Light Mode)
+────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background-color: var(--card-hover);
+  background-image: linear-gradient(90deg, var(--card-hover) 25%, var(--border) 50%, var(--card-hover) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+}
+
+/* En algunos navegadores móviles, la combinación de variables + gradientes puede renderizarse con fallback claro.
+   Forzamos una versión oscura explícita para evitar “cards blancas” durante loading. */
+[data-theme="dark"] .shimmer {
+  background-color: #1F2937;
+  background-image: linear-gradient(90deg, #1F2937 25%, #374151 50%, #1F2937 75%);
+}
+
+/* ──────────────────────────────────────────
+   RESPONSIVE UI (Mobile)
+────────────────────────────────────────── */
+.topnav-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.eval-basic-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 640px) {
+  .topnav-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .eval-basic-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}

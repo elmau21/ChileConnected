@@ -1,0 +1,32 @@
+{
+  "name": "chileconnected",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Plataforma web para centralizar beneficios sociales de Chile + chatbot RAG (Groq).",
+  "scripts": {
+    "dev": "npm run -w @chileconnected/api dev",
+    "dev:web": "npm run -w @chileconnected/web dev",
+    "dev:api": "npm run -w @chileconnected/api dev",
+    "build": "npm run -ws build",
+    "lint": "npm run -ws lint",
+    "format": "npm run -ws format",
+    "typecheck": "npm run -ws typecheck",
+    "scrape": "npm run -w @chileconnected/api scrape",
+    "embed:backfill": "npm run -w @chileconnected/api embed:backfill"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "eslint": "^10.0.3",
+    "prettier": "^3.8.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
